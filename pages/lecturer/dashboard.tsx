@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FormEvent, useEffect, useMemo, useState } from 'react';
 import { LecturerSidebar } from '@/components/lecturer-sidebar';
@@ -64,6 +65,7 @@ function formatDateTime(value: string | null) {
 }
 
 export default function LecturerDashboard() {
+  const router = useRouter();
   const { user } = useAuth();
   const [sessions, setSessions] = useState<Session[]>([]);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
@@ -133,6 +135,7 @@ export default function LecturerDashboard() {
       setCourseName('');
       setModalOpen(false);
       setToast('Session created successfully');
+      router.push(`/lecturer/session/${createdSession._id}`);
     } catch {
       setToast('Failed to create session. Please try again.');
     } finally {
