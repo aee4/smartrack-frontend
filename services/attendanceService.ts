@@ -1,5 +1,7 @@
 import api from './api';
 
+const BACKEND_URL = 'https://smartrack-backend.onrender.com';
+
 export interface StudentRef {
   _id?: string;
   name?: string;
@@ -54,7 +56,7 @@ export const submitAttendance = async (
   latitude: number,
   longitude: number,
 ): Promise<SubmitAttendanceResponse> => {
-  const response = await api.post<SubmitAttendanceResponse>('/api/attendance/submit', {
+  const response = await api.post<SubmitAttendanceResponse>(`${BACKEND_URL}/api/attendance/submit`, {
     sessionId,
     qrToken,
     deviceId,
@@ -66,22 +68,22 @@ export const submitAttendance = async (
 };
 
 export const getSessionAttendance = async (sessionId: string): Promise<AttendanceListResponse> => {
-  const response = await api.get<AttendanceListResponse>(`/api/attendance/session/${sessionId}`);
+  const response = await api.get<AttendanceListResponse>(`${BACKEND_URL}/api/attendance/session/${sessionId}`);
   return response.data;
 };
 
 export const getMyAttendance = async (): Promise<AttendanceListResponse> => {
-  const response = await api.get<AttendanceListResponse>('/api/attendance/student/me');
+  const response = await api.get<AttendanceListResponse>(`${BACKEND_URL}/api/attendance/student/me`);
   return response.data;
 };
 
 export const getAnalytics = async (sessionId: string): Promise<AnalyticsResponse> => {
-  const response = await api.get<AnalyticsResponse>(`/api/attendance/analytics/${sessionId}`);
+  const response = await api.get<AnalyticsResponse>(`${BACKEND_URL}/api/attendance/analytics/${sessionId}`);
   return response.data;
 };
 
 export const exportCSV = async (sessionId: string): Promise<void> => {
-  const response = await api.get<Blob>(`/api/attendance/export/${sessionId}`, {
+  const response = await api.get<Blob>(`${BACKEND_URL}/api/attendance/export/${sessionId}`, {
     responseType: 'blob',
   });
 

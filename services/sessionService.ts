@@ -1,5 +1,7 @@
 import api from './api';
 
+const BACKEND_URL = 'https://smartrack-backend.onrender.com';
+
 export interface Session {
   _id: string;
   lecturerId?: string;
@@ -27,12 +29,12 @@ export interface SessionsResponse {
 }
 
 export const createSession = async (course: string): Promise<SessionResponse> => {
-  const response = await api.post<SessionResponse>('/api/sessions', { course });
+  const response = await api.post<SessionResponse>(`${BACKEND_URL}/api/sessions`, { course });
   return response.data;
 };
 
 export const startSession = async (id: string, latitude: number, longitude: number): Promise<SessionResponse> => {
-  const response = await api.patch<SessionResponse>(`/api/sessions/${id}/start`, {
+  const response = await api.patch<SessionResponse>(`${BACKEND_URL}/api/sessions/${id}/start`, {
     latitude,
     longitude,
   });
@@ -41,16 +43,16 @@ export const startSession = async (id: string, latitude: number, longitude: numb
 };
 
 export const stopSession = async (id: string): Promise<SessionResponse> => {
-  const response = await api.patch<SessionResponse>(`/api/sessions/${id}/stop`);
+  const response = await api.patch<SessionResponse>(`${BACKEND_URL}/api/sessions/${id}/stop`);
   return response.data;
 };
 
 export const getSession = async (id: string): Promise<SessionResponse> => {
-  const response = await api.get<SessionResponse>(`/api/sessions/${id}`);
+  const response = await api.get<SessionResponse>(`${BACKEND_URL}/api/sessions/${id}`);
   return response.data;
 };
 
 export const getMySessions = async (): Promise<SessionsResponse> => {
-  const response = await api.get<SessionsResponse>('/api/sessions/my');
+  const response = await api.get<SessionsResponse>(`${BACKEND_URL}/api/sessions/my`);
   return response.data;
 };

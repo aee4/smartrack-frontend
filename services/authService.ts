@@ -1,5 +1,7 @@
 import api from './api';
 
+const BACKEND_URL = 'https://smartrack-backend.onrender.com';
+
 export type AuthRole = 'student' | 'lecturer';
 
 export interface User {
@@ -28,7 +30,7 @@ export const register = async (
   role: AuthRole,
   studentId?: string,
 ): Promise<AuthResponse> => {
-  const response = await api.post<AuthResponse>('/api/auth/register', {
+  const response = await api.post<AuthResponse>(`${BACKEND_URL}/api/auth/register`, {
     name,
     email,
     password,
@@ -40,7 +42,7 @@ export const register = async (
 };
 
 export const login = async (email: string, password: string): Promise<AuthResponse> => {
-  const response = await api.post<AuthResponse>('/api/auth/login', {
+  const response = await api.post<AuthResponse>(`${BACKEND_URL}/api/auth/login`, {
     email,
     password,
   });
@@ -55,7 +57,7 @@ export const login = async (email: string, password: string): Promise<AuthRespon
 };
 
 export const getMe = async (): Promise<MeResponse> => {
-  const response = await api.get<MeResponse>('/api/auth/me');
+  const response = await api.get<MeResponse>(`${BACKEND_URL}/api/auth/me`);
   return response.data;
 };
 
