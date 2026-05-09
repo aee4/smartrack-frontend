@@ -20,9 +20,9 @@ export function useSocket(sessionId: string): SocketHookResult {
   const [connected, setConnected] = useState(false);
 
   useEffect(() => {
-    if (!sessionId || !process.env.NEXT_PUBLIC_SOCKET_URL) return undefined;
+    if (!sessionId) return undefined;
 
-    const socket: Socket = io(process.env.NEXT_PUBLIC_SOCKET_URL);
+    const socket: Socket = io('https://smartrack-backend.onrender.com');
 
     socket.on('connect', () => {
       setConnected(true);
