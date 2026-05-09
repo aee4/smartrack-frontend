@@ -1,0 +1,14 @@
+import { v4 as uuidv4 } from 'uuid';
+
+export const getDeviceId = (): string => {
+  if (typeof window === 'undefined') return '';
+
+  let deviceId = localStorage.getItem('smartattend_device_id');
+
+  if (!deviceId) {
+    deviceId = uuidv4();
+    localStorage.setItem('smartattend_device_id', deviceId);
+  }
+
+  return deviceId;
+};
