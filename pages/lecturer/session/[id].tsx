@@ -137,9 +137,9 @@ export default function SessionDetail() {
 
   const generateQrFromSession = useCallback(async (nextSession: Session) => {
     if (nextSession.activeStatus && nextSession.qrToken) {
-      const qrData = JSON.stringify({ sessionId: nextSession._id, qrToken: nextSession.qrToken });
-      const dataUrl = await QRCode.toDataURL(qrData);
-      setQrCode(dataUrl);
+      const payload = JSON.stringify({ sessionId: nextSession._id, qrToken: nextSession.qrToken });
+      const qrImageSrc = await QRCode.toDataURL(payload);
+      setQrCode(qrImageSrc);
     }
   }, []);
 
@@ -236,10 +236,9 @@ export default function SessionDetail() {
       try {
         const result = await sessionService.startSession(id, latitude, longitude);
         const nextSession = unwrapData<Session>(result, 'session');
-        const nextQrCode = (result as { qrCode?: string }).qrCode;
 
         setSession(nextSession);
-        setQrCode(nextQrCode ?? null);
+        await generateQrFromSession(nextSession);
         setToast('Session started successfully');
       } catch {
         setToast('Failed to start session. Please try again.');
