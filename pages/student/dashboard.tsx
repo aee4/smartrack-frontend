@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { Toast } from '@/components/Toast';
 import { useAuth } from '@/context/AuthContext';
+import { WarningIcon } from '@/components/icons';
 import * as attendanceService from '@/services/attendanceService';
 
 // const mockStudent = {
@@ -220,7 +221,10 @@ export default function StudentDashboard() {
                             {course.attended} of {course.total} sessions attended
                           </p>
                           {course.percentage < 75 && (
-                            <p className="mt-3 text-sm font-semibold text-red-600">⚠️ Below minimum attendance</p>
+                            <p className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-red-600">
+                              <WarningIcon className="h-4 w-4" />
+                              Below minimum attendance
+                            </p>
                           )}
                         </motion.article>
                       ))

@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
+import { ClipboardIcon, PlusIcon, ClockIcon } from '@/components/icons';
 
 const navItems = [
-  { label: 'Dashboard', icon: '📋', href: '/lecturer/dashboard' },
-  { label: 'New Session', icon: '➕', href: null },
-  { label: 'Session History', icon: '🕓', href: null },
+  { label: 'Dashboard', icon: <ClipboardIcon className="h-4 w-4" />, href: '/lecturer/dashboard' },
+  { label: 'New Session', icon: <PlusIcon className="h-4 w-4" />, href: null },
+  { label: 'Session History', icon: <ClockIcon className="h-4 w-4" />, href: null },
 ];
 
 export function LecturerSidebar({

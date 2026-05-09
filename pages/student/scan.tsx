@@ -8,6 +8,7 @@ import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { Toast } from '@/components/Toast';
 import { useAuth } from '@/context/AuthContext';
 import { useGeolocation } from '@/hooks/useGeolocation';
+import { ArrowLeftIcon, CheckIcon, ClockIcon } from '@/components/icons';
 import * as attendanceService from '@/services/attendanceService';
 import { getDeviceId } from '@/utils/deviceId';
 
@@ -259,9 +260,10 @@ export default function StudentScan() {
           <main className="mx-auto max-w-3xl px-5 py-8">
             <Link
               href="/student/dashboard"
-              className="inline-flex items-center text-sm font-semibold text-muted transition hover:text-gold"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-muted transition hover:text-gold"
             >
-              ← Back to dashboard
+              <ArrowLeftIcon className="h-4 w-4" />
+              Back to dashboard
             </Link>
 
             <section className="mt-6">
@@ -281,8 +283,14 @@ export default function StudentScan() {
                       active || complete ? 'border-b-2 border-gold text-gold' : 'border-b-2 border-transparent text-muted'
                     }`}
                   >
-                    {complete ? '✓ ' : ''}
-                    {item.label}
+                    {complete ? (
+                      <span className="inline-flex items-center gap-1 text-gold">
+                        <CheckIcon className="h-4 w-4" />
+                        {item.label}
+                      </span>
+                    ) : (
+                      item.label
+                    )}
                   </div>
                 );
               })}
@@ -396,11 +404,16 @@ export default function StudentScan() {
                     </h2>
                     {submittedStatus && (
                       <span
-                        className={`mt-5 rounded-full px-4 py-1.5 text-xs font-bold uppercase text-white ${
+                        className={`mt-5 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold uppercase text-white ${
                           submittedStatus === 'present' ? 'bg-green-600' : 'bg-amber-500'
                         }`}
                       >
-                        {submittedStatus === 'present' ? '✅ Present' : '🕐 Late'}
+                        {submittedStatus === 'present' ? (
+                          <CheckIcon className="h-4 w-4" />
+                        ) : (
+                          <ClockIcon className="h-4 w-4" />
+                        )}
+                        {submittedStatus === 'present' ? 'Present' : 'Late'}
                       </span>
                     )}
                     <p className="mt-6 font-serif text-2xl font-semibold text-ink">{confirmedCourse}</p>

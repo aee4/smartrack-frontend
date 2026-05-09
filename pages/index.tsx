@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import SkullCanvas from '@/components/SkullCanvas';
+import { LockIcon, MapPinIcon, BoltIcon } from '@/components/icons';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -10,17 +11,17 @@ const fadeUp = {
 
 const features = [
   {
-    icon: '🔐',
+    icon: <LockIcon className="h-10 w-10" />,
     title: 'Anti-Proxy Protection',
     description: 'QR + GPS + Device fingerprinting eliminates ghost attendance',
   },
   {
-    icon: '📍',
+    icon: <MapPinIcon className="h-10 w-10" />,
     title: 'Dynamic Location',
     description: 'Classroom location captured automatically on session start',
   },
   {
-    icon: '⚡',
+    icon: <BoltIcon className="h-10 w-10" />,
     title: 'Live Dashboard',
     description: 'Attendance updates in real time as students check in',
   },

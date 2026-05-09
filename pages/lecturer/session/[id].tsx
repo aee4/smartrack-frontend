@@ -7,6 +7,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { LecturerSidebar } from '@/components/lecturer-sidebar';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { Toast } from '@/components/Toast';
+import { ArrowLeftIcon, MenuIcon, StatusDotIcon, CheckCircleIcon, XCircleIcon, ClockIcon } from '@/components/icons';
 import { useAuth } from '@/context/AuthContext';
 import { useGeolocation } from '@/hooks/useGeolocation';
 import { useSocket } from '@/hooks/useSocket';
@@ -310,7 +311,7 @@ export default function SessionDetail() {
               className="border border-border px-3 py-2 text-xl leading-none text-ink transition hover:border-gold"
               aria-label="Open navigation"
             >
-              ☰
+              <MenuIcon className="h-5 w-5" />
             </button>
             <Link href="/" className="font-serif text-3xl font-semibold text-gold">
               SmartAttend
@@ -347,9 +348,10 @@ export default function SessionDetail() {
                 <div>
                   <Link
                     href="/lecturer/dashboard"
-                    className="inline-flex items-center text-sm font-semibold text-muted transition hover:text-gold"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-muted transition hover:text-gold"
                   >
-                    ← Back to dashboard
+                    <ArrowLeftIcon className="h-4 w-4" />
+                    Back to dashboard
                   </Link>
                   <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
                     <motion.h1
@@ -365,7 +367,10 @@ export default function SessionDetail() {
                         sessionActive ? 'bg-gold text-ink' : 'bg-[#EDEDED] text-muted'
                       }`}
                     >
-                      {sessionActive ? '🟢 Active' : '⚫ Closed'}
+                      <span className="inline-flex items-center gap-2">
+                        <StatusDotIcon className={sessionActive ? 'text-gold bg-gold' : 'text-muted bg-muted'} />
+                        {sessionActive ? 'Active' : 'Closed'}
+                      </span>
                     </span>
                   </div>
                   <p className="mt-3 text-sm text-muted">
@@ -451,9 +456,9 @@ export default function SessionDetail() {
                     className="grid gap-4 sm:grid-cols-3"
                   >
                     {[
-                      { label: 'Present', icon: '✅', value: analytics.present, color: 'text-gold' },
-                      { label: 'Late', icon: '🕐', value: analytics.late, color: 'text-amber-500' },
-                      { label: 'Absent', icon: '❌', value: analytics.absent, color: 'text-red-600' },
+                      { label: 'Present', icon: <CheckCircleIcon className="h-5 w-5" />, value: analytics.present, color: 'text-gold' },
+                      { label: 'Late', icon: <ClockIcon className="h-5 w-5" />, value: analytics.late, color: 'text-amber-500' },
+                      { label: 'Absent', icon: <XCircleIcon className="h-5 w-5" />, value: analytics.absent, color: 'text-red-600' },
                     ].map((counter) => (
                       <motion.article
                         key={counter.label}
@@ -462,7 +467,10 @@ export default function SessionDetail() {
                         className="border border-border bg-white p-5 shadow-[0_10px_28px_rgba(10,10,10,0.035)]"
                       >
                         <p className="text-sm font-medium text-muted">
-                          <span aria-hidden="true">{counter.icon}</span> {counter.label}
+                          <span aria-hidden="true" className="inline-flex items-center gap-2">
+                            {counter.icon}
+                            {counter.label}
+                          </span>
                         </p>
                         <p className={`mt-3 font-serif text-5xl font-semibold ${counter.color}`}>
                           <CountUpNumber value={counter.value} />
@@ -494,7 +502,10 @@ export default function SessionDetail() {
                           Live — updating in real time
                         </>
                       ) : (
-                        <>⚪ Reconnecting...</>
+                        <span className="inline-flex items-center gap-2">
+                          <StatusDotIcon className="bg-muted text-muted" />
+                          Reconnecting...
+                        </span>
                       )}
                     </div>
 

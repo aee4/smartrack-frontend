@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { AnimatePresence, animate, motion } from 'framer-motion';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { ArrowLeftIcon, MenuIcon } from '@/components/icons';
 import { LecturerSidebar } from '@/components/lecturer-sidebar';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { Toast } from '@/components/Toast';
@@ -329,7 +330,7 @@ export default function AnalyticsPage() {
               className="border border-border px-3 py-2 text-xl leading-none text-ink transition hover:border-gold"
               aria-label="Open navigation"
             >
-              ☰
+              <MenuIcon className="h-5 w-5" />
             </button>
             <Link href="/" className="font-serif text-3xl font-semibold text-gold">
               SmartAttend
@@ -362,8 +363,9 @@ export default function AnalyticsPage() {
             <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8 lg:px-10 lg:py-10">
               <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
                 <div>
-                  <Link href="/lecturer/dashboard" className="text-sm font-semibold text-muted transition hover:text-gold">
-                    ← Back to dashboard
+                  <Link href="/lecturer/dashboard" className="inline-flex items-center gap-2 text-sm font-semibold text-muted transition hover:text-gold">
+                    <ArrowLeftIcon className="h-4 w-4" />
+                    Back to dashboard
                   </Link>
                   <h1 className="mt-5 font-serif text-4xl font-semibold text-ink md:text-5xl">
                     {session?.course ?? 'Session Analytics'}

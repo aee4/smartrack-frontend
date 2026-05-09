@@ -2,12 +2,13 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import type { ReactNode } from 'react';
 import SkullCanvas from '@/components/SkullCanvas';
+import { GraduationCapIcon, TeacherIcon } from '@/components/icons';
 
 export type Role = 'student' | 'lecturer';
 
-export const roles: Array<{ id: Role; icon: string; label: string }> = [
-  { id: 'student', icon: '🎓', label: 'Student' },
-  { id: 'lecturer', icon: '👨‍🏫', label: 'Lecturer' },
+export const roles: Array<{ id: Role; icon: ReactNode; label: string }> = [
+  { id: 'student', icon: <GraduationCapIcon className="h-6 w-6" />, label: 'Student' },
+  { id: 'lecturer', icon: <TeacherIcon className="h-6 w-6" />, label: 'Lecturer' },
 ];
 
 export const fieldVariants = {
