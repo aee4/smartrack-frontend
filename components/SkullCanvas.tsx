@@ -22,58 +22,61 @@ type Point = {
 };
 
 const SKULL_OUTLINE: Point[] = [
-  { x: -0.18, y: -1.05 },
-  { x: 0.18, y: -1.05 },
-  { x: 0.36, y: -0.96 },
-  { x: 0.43, y: -0.78 },
-  { x: 0.42, y: -0.58 },
-  { x: 0.58, y: -0.47 },
-  { x: 0.69, y: -0.28 },
-  { x: 0.64, y: -0.08 },
-  { x: 0.52, y: 0.04 },
-  { x: 0.70, y: 0.30 },
-  { x: 0.76, y: 0.62 },
-  { x: 0.66, y: 0.90 },
-  { x: 0.45, y: 1.12 },
-  { x: 0.16, y: 1.25 },
-  { x: 0, y: 1.28 },
-  { x: -0.16, y: 1.25 },
-  { x: -0.45, y: 1.12 },
-  { x: -0.66, y: 0.90 },
-  { x: -0.76, y: 0.62 },
-  { x: -0.70, y: 0.30 },
-  { x: -0.52, y: 0.04 },
-  { x: -0.64, y: -0.08 },
-  { x: -0.69, y: -0.28 },
-  { x: -0.58, y: -0.47 },
-  { x: -0.42, y: -0.58 },
-  { x: -0.43, y: -0.78 },
-  { x: -0.36, y: -0.96 },
+  { x: -0.16, y: -1.04 },
+  { x: 0.16, y: -1.04 },
+  { x: 0.31, y: -0.98 },
+  { x: 0.39, y: -0.84 },
+  { x: 0.39, y: -0.61 },
+  { x: 0.53, y: -0.50 },
+  { x: 0.65, y: -0.26 },
+  { x: 0.60, y: -0.04 },
+  { x: 0.49, y: 0.10 },
+  { x: 0.67, y: 0.36 },
+  { x: 0.74, y: 0.66 },
+  { x: 0.66, y: 0.94 },
+  { x: 0.46, y: 1.16 },
+  { x: 0.18, y: 1.29 },
+  { x: 0, y: 1.32 },
+  { x: -0.18, y: 1.29 },
+  { x: -0.46, y: 1.16 },
+  { x: -0.66, y: 0.94 },
+  { x: -0.74, y: 0.66 },
+  { x: -0.67, y: 0.36 },
+  { x: -0.49, y: 0.10 },
+  { x: -0.60, y: -0.04 },
+  { x: -0.65, y: -0.26 },
+  { x: -0.53, y: -0.50 },
+  { x: -0.39, y: -0.61 },
+  { x: -0.39, y: -0.84 },
+  { x: -0.31, y: -0.98 },
 ];
 
 const NOSE_VOID: Point[] = [
   { x: 0, y: 0.08 },
-  { x: 0.13, y: -0.18 },
-  { x: 0.07, y: -0.46 },
-  { x: -0.07, y: -0.46 },
-  { x: -0.13, y: -0.18 },
+  { x: 0.12, y: -0.10 },
+  { x: 0.09, y: -0.30 },
+  { x: 0.03, y: -0.43 },
+  { x: 0, y: -0.47 },
+  { x: -0.03, y: -0.43 },
+  { x: -0.09, y: -0.30 },
+  { x: -0.12, y: -0.10 },
 ];
 
-const TEETH_RECTS = [-0.24, -0.14, -0.04, 0.06, 0.16].map((x) => ({
+const TEETH_RECTS = [-0.28, -0.20, -0.12, -0.04, 0.04, 0.12, 0.20].map((x) => ({
   x,
-  y: -0.82,
-  width: 0.08,
-  height: 0.25,
+  y: -0.97,
+  width: 0.058,
+  height: 0.31,
 }));
 
 const CHEEKBONE_LINES: Array<[Point, Point]> = [
-  [{ x: -0.62, y: -0.08 }, { x: -0.18, y: -0.28 }],
-  [{ x: 0.62, y: -0.08 }, { x: 0.18, y: -0.28 }],
-  [{ x: -0.46, y: -0.24 }, { x: -0.26, y: -0.50 }],
-  [{ x: 0.46, y: -0.24 }, { x: 0.26, y: -0.50 }],
+  [{ x: -0.60, y: -0.02 }, { x: -0.18, y: -0.28 }],
+  [{ x: 0.60, y: -0.02 }, { x: 0.18, y: -0.28 }],
+  [{ x: -0.49, y: -0.20 }, { x: -0.27, y: -0.54 }],
+  [{ x: 0.49, y: -0.20 }, { x: 0.27, y: -0.54 }],
 ];
 
-const LIGHT_COLORS = ['#CCCCCC', '#BBBBBB', '#AAAAAA'];
+const LIGHT_COLORS = ['#BBBBBB', '#CCCCCC', '#D4D4D4'];
 const DARK_COLORS = ['#444444', '#555555', '#666666'];
 const CENTER = new THREE.Vector2(0, 0.08);
 const matrix = new THREE.Matrix4();
@@ -120,12 +123,12 @@ function isInToothCluster(x: number, y: number) {
 
 function belongsToSkull(x: number, y: number) {
   const insideSilhouette = pointInPolygon({ x, y }, SKULL_OUTLINE);
-  const leftEye = ellipseContains(x, y, -0.28, 0.30, 0.21, 0.28, -0.18);
-  const rightEye = ellipseContains(x, y, 0.28, 0.30, 0.21, 0.28, 0.18);
-  const nose = pointInPolygon({ x, y }, NOSE_VOID);
+  const leftEye = ellipseContains(x, y, -0.27, 0.27, 0.19, 0.29, -0.13);
+  const rightEye = ellipseContains(x, y, 0.27, 0.27, 0.19, 0.29, 0.13);
+  const nose = pointInPolygon({ x, y }, NOSE_VOID) || ellipseContains(x, y, 0, -0.20, 0.13, 0.25, 0);
   const templeCut = Math.abs(x) > 0.58 && y < 0.10 && y > -0.36;
-  const jawGap = y < -0.57 && y > -0.97 && Math.abs(x) < 0.31 && !isInToothCluster(x, y);
-  const lowerCornerCut = y < -0.77 && Math.abs(x) > 0.30;
+  const jawGap = y < -0.65 && y > -1.00 && Math.abs(x) < 0.34 && !isInToothCluster(x, y);
+  const lowerCornerCut = y < -0.78 && Math.abs(x) > 0.32;
 
   return insideSilhouette && !leftEye && !rightEye && !nose && !templeCut && !jawGap && !lowerCornerCut;
 }
@@ -149,29 +152,39 @@ function addLinePoints(points: Point[], from: Point, to: Point, spacing: number)
   }
 }
 
+function addPolygonPoints(points: Point[], polygon: Point[], spacing: number) {
+  polygon.forEach((point, index) => {
+    addLinePoints(points, point, polygon[(index + 1) % polygon.length], spacing);
+  });
+}
+
 function buildPointMap(targetCount: number, tone: SkullTone) {
   const colors = tone === 'light' ? LIGHT_COLORS : DARK_COLORS;
   const candidates: Point[] = [];
-  const spacing = targetCount <= 450 ? 0.071 : 0.045;
+  const spacing = targetCount <= 520 ? 0.063 : 0.031;
 
-  for (let y = -1.05; y <= 1.28; y += spacing) {
-    for (let x = -0.78; x <= 0.78; x += spacing) {
+  for (let y = -1.05; y <= 1.32; y += spacing) {
+    for (let x = -0.76; x <= 0.76; x += spacing) {
       const index = candidates.length + Math.floor((x + 2) * 1000) + Math.floor((y + 2) * 100);
       const jitterX = (seededRandom(index + 11) - 0.5) * spacing * 0.34;
       const jitterY = (seededRandom(index + 23) - 0.5) * spacing * 0.34;
       const point = { x: x + jitterX, y: y + jitterY };
+      const interiorCranium = point.y > 0.38 && Math.abs(point.x) < 0.48;
+      const keepInterior = !interiorCranium || seededRandom(index + 37) > 0.36;
 
-      if (belongsToSkull(point.x, point.y)) {
+      if (belongsToSkull(point.x, point.y) && keepInterior) {
         candidates.push(point);
       }
     }
   }
 
-  CHEEKBONE_LINES.forEach(([from, to]) => addLinePoints(candidates, from, to, spacing * 0.55));
+  addPolygonPoints(candidates, SKULL_OUTLINE, spacing * 0.38);
+  addPolygonPoints(candidates, NOSE_VOID, spacing * 0.50);
+  CHEEKBONE_LINES.forEach(([from, to]) => addLinePoints(candidates, from, to, spacing * 0.36));
 
   TEETH_RECTS.forEach((rect) => {
-    for (let y = rect.y + 0.025; y < rect.y + rect.height - 0.015; y += spacing * 0.75) {
-      for (let x = rect.x + 0.018; x < rect.x + rect.width - 0.012; x += spacing * 0.75) {
+    for (let y = rect.y + 0.018; y < rect.y + rect.height - 0.018; y += spacing * 0.48) {
+      for (let x = rect.x + 0.012; x < rect.x + rect.width - 0.012; x += spacing * 0.48) {
         candidates.push({ x, y });
       }
     }
@@ -213,7 +226,7 @@ function useMobileParticleCount() {
     return () => query.removeEventListener('change', update);
   }, []);
 
-  return isMobile ? 400 : 920;
+  return isMobile ? 520 : 1400;
 }
 
 function SkullParticles({
@@ -312,8 +325,8 @@ function SkullParticles({
   return (
     <group scale={scale}>
       <instancedMesh ref={meshRef} args={[undefined, undefined, particles.length]} frustumCulled={false}>
-        <sphereGeometry ref={geometryRef} args={[0.03, 10, 10]} />
-        <meshBasicMaterial ref={materialRef} vertexColors transparent opacity={0.95} />
+        <sphereGeometry ref={geometryRef} args={[0.018, 8, 8]} />
+        <meshBasicMaterial ref={materialRef} vertexColors transparent opacity={0.82} />
       </instancedMesh>
     </group>
   );

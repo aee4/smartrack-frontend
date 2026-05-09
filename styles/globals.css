@@ -17,13 +17,34 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+}
+
+body,
+#__next,
+main {
+  min-height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overscroll-behavior: none;
+  transform: none !important;
+  translate: none !important;
 }
 
 body {
-  margin: 0;
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), Inter, system-ui, sans-serif;
+  position: relative;
+  overflow-anchor: none;
+}
+
+main {
+  position: relative;
+  isolation: isolate;
 }
 
 a {

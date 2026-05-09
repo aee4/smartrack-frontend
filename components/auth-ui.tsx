@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import type { ReactNode } from 'react';
-import SkullCanvas from '@/components/SkullCanvas';
+import PadlockCanvas from '@/components/PadlockCanvas';
 import { GraduationCapIcon, TeacherIcon } from '@/components/icons';
 
 export type Role = 'student' | 'lecturer';
@@ -153,8 +153,8 @@ export function DecorativePanel({
       className="flex min-h-28 items-center justify-center bg-ink px-6 py-8 md:min-h-screen"
     >
       <div className="hidden w-full max-w-lg md:block">
-        <div className="mx-auto h-[390px] w-full max-w-md opacity-70">
-          <SkullCanvas tone="dark" scale={0.9} />
+        <div className="mx-auto h-[390px] w-full max-w-md bg-[radial-gradient(circle,rgba(255,255,255,0.05)_0%,transparent_70%)] opacity-70">
+          <PadlockCanvas variant="dark" scale={0.9} />
         </div>
         <p className="mx-auto mt-10 max-w-md text-center font-serif text-4xl font-medium italic leading-tight text-gold">
           {quote}

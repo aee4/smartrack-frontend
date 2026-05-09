@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
   return (
-    <main className={`${cormorant.variable} ${inter.variable} font-sans`}>
+    <main className={`${cormorant.variable} ${inter.variable} font-sans app-shell`}>
       <AuthProvider>
         <AnimatePresence mode="wait" initial={false}>
           <motion.div

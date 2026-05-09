@@ -6,7 +6,6 @@ import { isAxiosError } from 'axios';
 import { FormEvent, useEffect, useState } from 'react';
 import {
   BrandLink,
-  DecorativePanel,
   PasswordToggle,
   Role,
   RoleSelector,
@@ -71,12 +70,12 @@ export default function Login() {
         <meta name="description" content="Sign in to SmartAttend." />
       </Head>
 
-      <main className="grid min-h-screen bg-white text-ink md:grid-cols-2">
+      <main className="flex min-h-screen bg-white text-ink">
         <motion.section
-          initial={{ opacity: 0, x: -32 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="flex min-h-screen items-center px-6 py-10 sm:px-10 lg:px-16"
+          className="flex min-h-screen w-full items-center px-6 py-10 sm:px-10 lg:w-1/2 lg:px-16"
         >
           <div className="mx-auto w-full max-w-md">
             <BrandLink />
@@ -171,14 +170,33 @@ export default function Login() {
                   Register
                 </Link>
               </motion.p>
+              <motion.p variants={fieldVariants} className="mt-8 text-center font-serif text-2xl font-medium italic text-gold">
+                No proxies. No shortcuts. Just presence.
+              </motion.p>
             </motion.div>
           </div>
         </motion.section>
 
-        <DecorativePanel
-          direction="right"
-          quote="No proxies. No shortcuts. Just presence."
-        />
+        <aside className="hidden min-h-screen bg-black lg:block lg:w-1/2">
+          <div className="flex h-full flex-col items-center justify-center px-12">
+            {/* Top decorative element */}
+            <div className="mb-12 h-8 w-8 rounded-full border-2" style={{ borderColor: '#C9A84C' }} />
+
+            {/* Gold lines and quote */}
+            <div className="mb-8 h-px w-16" style={{ backgroundColor: '#C9A84C' }} />
+            <p className="max-w-xs text-center font-serif text-3xl italic leading-relaxed" style={{ color: '#C9A84C' }}>
+              &quot;No proxies. No shortcuts. Just presence.&quot;
+            </p>
+            <div className="mt-8 h-px w-16" style={{ backgroundColor: '#C9A84C' }} />
+
+            {/* Bottom decorative element */}
+            <div className="mt-12 flex gap-2">
+              <div className="h-1 w-1 rounded-full" style={{ backgroundColor: '#C9A84C' }} />
+              <div className="h-1 w-1 rounded-full" style={{ backgroundColor: '#C9A84C' }} />
+              <div className="h-1 w-1 rounded-full" style={{ backgroundColor: '#C9A84C' }} />
+            </div>
+          </div>
+        </aside>
       </main>
     </>
   );
